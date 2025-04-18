@@ -15,8 +15,26 @@ def main():
     read_parser.add_argument("id", help="ID of the thing to read")
     read_parser.add_argument("--format", choices=["text", "json"], default="text", help="output format")
 
-    #You can add any other update or delete commands here
+    # You can add any other update or delete commands here
     # ...
+    args = parser.parse_args()
+
+    if args.command is None:
+        parser.print_help()
+        sys.exit(1)
+
+    if args.command == "create":
+        result = create_something(args.name, args.type)
+    elif args.command == "read":
+        result = read_something(args.id, args.format)
+    # You can add any other options (elif) you want to add here
+    else:
+        print(f"Unkown command: {args.command}")
+        sys.exit(1)
+
+    display_results(result, args)
+
+    sys.exit(0)
 
     def create_something(name, type__):
         pass
