@@ -16,7 +16,8 @@ class TodoList:
                 return {"tasks": []}
 
     def _save_tasks(self):
-        pass
+        with open(self.file_path, 'w') as file:
+            json.dump(self.tasks, file, indent=4)
 
     def add_task(self):
         pass
