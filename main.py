@@ -8,7 +8,12 @@ class TodoList:
         self.tasks = self._load_tasks()
 
     def _load_tasks(self):
-        pass
+        if os.path.exists(self.file_path):
+            try:
+                with open(self.file_path, 'r') as file:
+                    return json.load(file)
+            except:
+                return {"tasks": []}
 
     def _save_tasks(self):
         pass
