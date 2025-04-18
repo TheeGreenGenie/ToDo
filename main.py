@@ -56,10 +56,30 @@ class TodoList:
         print('='*50 + '\n')
 
     def complete_task(self, task_id):
-        pass
+        for task in self.tasks['tasks']:
+            if task['id'] == task_id:
+                if task["completed"]:
+                    print(f"Task {task_id} is alrady marked as completed.")
+                else:
+                    task['completed'] = True
+                    task['completed_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    self._save_tasks()
+                    print(f"Task {task_id}")
+                return
+        print(f"task with ID {task_id} not found.")
 
     def delete_task(self, task_id):
-        pass
+        initial_length = len(self.tasks['tasks'])
+        self.tasks['tasks'] = [task for task in self.tasks['tasks'] if task['id'] != task_id]
+
+        if len(self.tasks['tasks']) < initial_length:
+            for i, task in enumerate(self.tasks['tasks']):
+                task['id'] = i + 1
+
+            self._save_tasks()
+            print(f"Task {task_id} has been deleted.")
+        else:
+            print(f"Task with ID {task_id} not found.")
 
     def print_help():
         pass
