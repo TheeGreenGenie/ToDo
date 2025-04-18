@@ -81,11 +81,24 @@ class TodoList:
         else:
             print(f"Task with ID {task_id} not found.")
 
-    def print_help():
-        pass
+def print_help():
+    print("\n==== TO-DO LIST HELP ====")
+    print("Available commands:")
+    print("  add <task>     - Add a new task")
+    print("  list           - List all pending tasks")
+    print("  completed      - List all completed tasks")
+    print("  complete <id>  - Mark a task as completed")
+    print("  delete <id>    - Delete a task")
+    print("  help           - Show this help menu")
+    print("  exit           - Exit the program")
+    print("=======================\n")
 
 def main():
-    pass
+    todo_list = TodoList()
+
+    print("\nWelcome to the To-Do list Application")
+    print_help()
+    
 
 if __name__ == "__main__":
     main()
