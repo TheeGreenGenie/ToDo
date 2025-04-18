@@ -18,11 +18,14 @@ def main():
     #You can add any other update or delete commands here
     # ...
 
-    args = parser.parse_args()
+    def create_something(name, type__):
+        pass
 
-    if args.command is None;
-        parser.print_help()
-        sys.exit(1)
+    def read_something(id__, format__):
+        pass
 
-    if args.command == "create":
-        result = create_something(args.name, args.type)
+    def display_results(result, args):
+        pass
+
+if __name__ == "__main__":
+    main()
