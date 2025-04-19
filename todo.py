@@ -117,9 +117,6 @@ def print_help():
 def main():
     todo_list = TodoList()
 
-    print(f"\nData file: {todo_list.file_path}")
-    print(f"tasks loaded: {len(todo_list.tasks.get('tasks', []))}")
-
     print("\nWelcome to the To-Do list Application")
     print_help()
 
