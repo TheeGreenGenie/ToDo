@@ -152,8 +152,8 @@ def main():
 
         elif command.lower().startswith('delete '):
             try:
-                task_id = int(command[9:].strip())
-                todo_list.complete_task(task_id)
+                task_id = int(command[7:].strip())
+                todo_list.delete_task(task_id)
             except ValueError:
                 print("Error: Task ID must be a number")
 
