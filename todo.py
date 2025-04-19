@@ -4,7 +4,14 @@ from datetime import datetime
 
 class TodoList:
     def __init__(self, file_path="todo_data.json"):
-        self.file_path = file_path
+        
+        if not os.path.isabs(file_path):
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            self.file_path = os.path.join(script_dir, file_path)
+        else:
+            self.file_path = file_path
+        
+        print(f"Using data file: {self.file_path}")
         self.tasks = self._load_tasks()
         if self.tasks is None or not isinstance(self.tasks, dict) or "tasks" not in self.tasks:
             self.tasks = {"tasks": []}
@@ -15,9 +22,19 @@ class TodoList:
                 with open(self.file_path, 'r') as file:
                     data = json.load(file)
                     if not isinstance(data, dict) or "tasks" not in data:
+                        print(f"Warning, data file '{self.file_path}' has incorrect format. Creating new task list")
                         return {"tasks": []}
-            except:
+                    return data
+            except json.JSONDecodeError as e:
+                print(f"Erro reading task file: {e}")
+                print(f"Creating new task list")
                 return {"tasks": []}
+            except Exception as e:
+                print(f"Unexpected error loading tasks")
+                print(f"Creating new task list.")
+                return {"tasks" : []}
+        else:
+            print(f"Task file '{self.file_path}' not found. Creating new file.")
 
     def _save_tasks(self):
         with open(self.file_path, 'w') as file:
@@ -99,6 +116,9 @@ def print_help():
 
 def main():
     todo_list = TodoList()
+
+    print(f"\nData file: {todo_list.file_path}")
+    print(f"tasks loaded: {len(todo_list.tasks.get('tasks', []))}")
 
     print("\nWelcome to the To-Do list Application")
     print_help()
