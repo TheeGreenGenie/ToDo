@@ -98,7 +98,43 @@ def main():
 
     print("\nWelcome to the To-Do list Application")
     print_help()
-    
+
+    while True:
+        command = input("\nEnter a command: ").strip()
+
+        if command.lower() == 'exit':
+            print('Goodbye')
+            break
+
+        elif command.lower() == 'help':
+            print_help()
+
+        elif command.lower() == 'list':
+            todo_list.list_tasks(show_completed=False)
+
+        elif command.lower() == 'completed':
+            todo_list.list_tasks(show_completed=True)
+
+        elif command.lower().startswith("add "):
+            task = command[4:].strip()
+            if task:
+                todo_list.add_task(task)
+            else:
+                print("Error: Task description cannot be empty.")
+        
+        elif command.lower().startswith('complete '):
+            try:
+                task_id = int(command[9:].strip())
+                todo_list.complete_task(task_id)
+            except ValueError:
+                print("Error: Task ID must be a number")
+
+        elif command.lower().startswith('delete '):
+            try:
+                task_id = int(command[9:].strip())
+                todo_list.complete_task(task_id)
+            except ValueError:
+                print("Error: Task ID must be a number")
 
 if __name__ == "__main__":
     main()
