@@ -6,12 +6,16 @@ class TodoList:
     def __init__(self, file_path="todo_data.json"):
         self.file_path = file_path
         self.tasks = self._load_tasks()
+        if self.tasks is None or not isinstance(self.tasks, dict) or "tasks" not in self.tasks:
+            self.tasks = {"tasks": []}
 
     def _load_tasks(self):
         if os.path.exists(self.file_path):
             try:
                 with open(self.file_path, 'r') as file:
-                    return json.load(file)
+                    data = json.load(file)
+                    if not isinstance(data, dict) or "tasks" not in data:
+                        return {"tasks": []}
             except:
                 return {"tasks": []}
 
