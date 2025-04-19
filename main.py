@@ -136,5 +136,8 @@ def main():
             except ValueError:
                 print("Error: Task ID must be a number")
 
+        else:
+            print("Unkown command. Type 'help' to see availale commands")
+
 if __name__ == "__main__":
     main()
